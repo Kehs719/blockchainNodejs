@@ -19,7 +19,9 @@ const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wal
 const isDevelopment = process.env.ENV === 'development';
 
 const DEFAULT_PORT = 3000;
-const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
+const ROOT_NODE_ADDRESS = isDevelopment ?
+    `http://localhost:${DEFAULT_PORT}` :
+    "https://fierce-sierra-53609.herokuapp.com";
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/client/dist")));
