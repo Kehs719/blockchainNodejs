@@ -50,9 +50,8 @@ class PubSub {
             message: messageObject => {
                 const { channel, message } = messageObject;
 
-                console.log(`Message received. Channel: ${channel}. Message: ${message}`);
+                console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
                 const parsedMessage = JSON.parse(message);
-                console.log(parsedMessage)
 
                 switch (channel) {
                     case CHANNELS.BLOCKCHAIN:
@@ -63,10 +62,10 @@ class PubSub {
                         });
                         break;
                     case CHANNELS.TRANSACTION:
-                        if (!this.transactionPool.existingTransaction({
-                            inputAddress: this.wallet.publicKey
-                        })) {
+                        if (parsedMessage.input.address !== this.wallet.publicKey) {
                             this.transactionPool.setTransaction(parsedMessage);
+                        } else {
+                            console.log('TRANSACTION broadcast recieved from self, ignoring..');
                         }
                         break;
                     default:
@@ -77,9 +76,7 @@ class PubSub {
     }
 
     publish({ channel, message }) {
-        // there is an unsubscribe function in pubnub
-        // but it doesn't have a callback that fires after success
-        // therefore, redundant publishes to the same local subscriber will be accepted as noisy no-ops
+
         this.pubnub.publish({ message, channel });
     }
 
