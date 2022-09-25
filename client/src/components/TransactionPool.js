@@ -12,27 +12,28 @@ class TransactionPool extends Component {
     fetchTransactionPoolMap = () => {
         fetch(`${document.location.origin}/api/transaction-pool-map`)
             .then(response => response.json())
-            .then(json => {
-                this.setState({ transactionPoolMap: json })
-            });
+            .then(json => this.setState({ transactionPoolMap: json }));
     }
 
     fetchMineTransactions = () => {
         fetch(`${document.location.origin}/api/mine-transactions`)
-            .then(res => {
-                if (res.status === 200) {
-                    alert("Success");
+            .then(response => {
+                if (response.status === 200) {
+                    alert('success');
                     history.push('/blocks');
                 } else {
-                    alert('The mine request was not complete');
+                    alert('The mine-transactions block request did not complete.');
                 }
-            })
+            });
     }
 
     componentDidMount() {
         this.fetchTransactionPoolMap();
 
-        this.fetchPoolMapInterval = setInterval(() => this.fetchTransactionPoolMap(), POLL_INTERVALL_MS)
+        this.fetchPoolMapInterval = setInterval(
+            () => this.fetchTransactionPoolMap(),
+            POLL_INTERVALL_MS
+        );
     }
 
     componentWillUnmount() {

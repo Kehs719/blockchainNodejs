@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import history from "../history"
 
 class ConductTransaction extends Component {
     state = { recipient: '', amount: 0 };
+
+
 
     updateRecipient = event => {
         this.setState({ recipient: event.target.value });
@@ -22,9 +25,9 @@ class ConductTransaction extends Component {
         }).then(response => response.json())
             .then(json => {
                 alert(json.message || json.type);
+                history.push('/transaction-pool');
             });
     }
-
     render() {
         return (
             <div className='ConductTransaction'>
