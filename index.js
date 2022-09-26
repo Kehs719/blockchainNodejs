@@ -175,6 +175,7 @@ app.listen(PORT, () => {
     console.log(`listening at localhost:${PORT}`);
 
     if (PORT !== DEFAULT_PORT) {
+        console.log("done")
         syncWithRootState();
     }
 });
