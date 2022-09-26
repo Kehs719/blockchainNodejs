@@ -50,7 +50,7 @@ class PubSub {
             message: messageObject => {
                 const { channel, message } = messageObject;
 
-                console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
+                console.log(`Message received. Channel: ${channel}. Message: ${message}`);
                 const parsedMessage = JSON.parse(message);
 
                 switch (channel) {
@@ -76,7 +76,9 @@ class PubSub {
     }
 
     publish({ channel, message }) {
-
+        // there is an unsubscribe function in pubnub
+        // but it doesn't have a callback that fires after success
+        // therefore, redundant publishes to the same local subscriber will be accepted as noisy no-ops
         this.pubnub.publish({ message, channel });
     }
 

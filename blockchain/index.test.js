@@ -1,5 +1,5 @@
-const Blockchain = require('../blockchain/index');
-const Block = require('../blockchain/block');
+const Blockchain = require('./index');
+const Block = require('./block');
 const { cryptoHash } = require('../util');
 const Wallet = require('../wallet');
 const Transaction = require('../wallet/transaction');
