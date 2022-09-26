@@ -5,7 +5,6 @@ import history from '../history';
 
 const POLL_INTERVALL_MS = 10000;
 
-
 class TransactionPool extends Component {
     state = { transactionPoolMap: {} };
 
