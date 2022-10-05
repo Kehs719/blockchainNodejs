@@ -1,10 +1,7 @@
 const PubNub = require('pubnub');
+require('dotenv').config();
 
-const credentials = {
-    publishKey: 'pub-c-54ead699-08ca-429d-8a6b-282237924abc',
-    subscribeKey: 'sub-c-fbbbafa3-4e53-4f83-94a4-ccadbe64b286',
-    secretKey: 'sec-c-ZGUwNjFiYTMtOTc0Yy00NzY1LTkzNmYtNDlkMjZjOThkYThh'
-};
+const credentials = process.env.PUBNUB_CREDENTIALS;
 
 const CHANNELS = {
     TEST: 'TEST',
